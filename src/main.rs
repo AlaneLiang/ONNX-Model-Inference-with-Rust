@@ -53,7 +53,7 @@ fn infer(model: &Session, input_vector: Vec<i64>) ->  Result<String, ort::Error>
 
     let argmx = output.iter().enumerate().max_by(|x, y| x.1.partial_cmp(y.1).unwrap()).unwrap().0;
 
-    // Labels
+    // Labels: this labels come from your train data
     let label = match argmx {
         0 => "finance",
         1 => "realty",
@@ -82,7 +82,9 @@ fn main() -> ort::Result<()> {
         let label = infer(&load_model("model.onnx")?, input_vector)?;
         print!("text:{},Label: {}\n", i,label);
     }
+  
     let end_time = std::time::Instant::now();
     println!("time: {:?}", end_time.duration_since(start_time));
+  
     Ok(())
 }
