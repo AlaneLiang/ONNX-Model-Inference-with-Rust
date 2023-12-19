@@ -23,7 +23,7 @@ fn load_model(model_path: &str) -> ort::Result<Session> {
         .with_model_from_file(model_path)
 }
 
-// secentces one-hot encoding
+// one-hot encoding
 fn preprocess_input(input: &str, word2index: &HashMap<String, i64>) -> Vec<i64> {
     let mut input_vector = Vec::new();
     for word in input.chars() {
